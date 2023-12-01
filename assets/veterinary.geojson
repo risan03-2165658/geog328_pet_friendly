@@ -1,0 +1,275 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3165256,
+          47.6098889,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Jet City Animal Clinic",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3195637,
+          47.7098319,
+          0
+        ]
+      },
+      "properties": {
+        "name": "North Seattle Veterinary Clinic",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3112719,
+          47.59521,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Rainier Veterinary Hospital",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.354664,
+          47.6248186,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Mercer Street Veterinary Hospital",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3567214,
+          47.6349055,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Queen Anne Animal Clinic",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3254899,
+          47.6333133,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Eastlake Veterinary Hospital",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3034347,
+          47.5839007,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Atlantic Veterinary Hospital",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2909166,
+          47.6977252,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Northeast Veterinary Hospital",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3033249,
+          47.6183146,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Madison Street Animal Hospital",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3318642,
+          47.6232381,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Lake Union Veterinary Clinic",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "icon-opacity": 1,
+        "icon-color": "#0288d1",
+        "icon-scale": 1,
+        "icon-offset": [
+          32,
+          64
+        ],
+        "icon-offset-units": [
+          "pixels",
+          "insetPixels"
+        ],
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    }
+  ]
+}
