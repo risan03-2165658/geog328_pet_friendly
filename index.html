@@ -161,37 +161,101 @@
         }
     }
 
-      map.on('load', () => {
-        // When the map loads, add the source and layer
-        map.addSource('iso', {
-          type: 'geojson',
-          data: {
-            'type': 'FeatureCollection',
-            'features': []
-          }      
+      async function loadMap() {
+        let response, parks, shops, vets;
+        response = await fetch('assets/pet_shops.geojson');
+        shops = await response.json();
+        response = await fetch('assets/veterinary.geojson');
+        vets = await response.json();
+        response = await fetch('assets/off_leash_parks.geojson');
+        parks = await response.json();
+
+        map.on('load', () => {
+          // When the map loads, add the source and layer
+          map.addSource('iso', {
+            type: 'geojson',
+            data: {
+              'type': 'FeatureCollection',
+              'features': []
+            }      
+          });
+
+          map.addLayer(
+            {
+              'id': 'isoLayer',
+              'type': 'fill',
+              'source': 'iso',
+              'layout': {},
+              'paint': {
+                'fill-color': '#5a3fc0',
+                'fill-opacity': 0.3
+              }
+            },
+            'poi-label'
+          );
+
+          // Initialize the marker at the query coordinates
+          marker.setLngLat(lngLat).addTo(map);
+
+          // Make the API call
+          getIso();
+          getLocation();
+
+          map.addSource('shops', {
+              type: 'geojson',
+              data: shops
+          });
+
+          map.addLayer({
+              'id': 'shops-layer',
+              'type': 'circle',
+              'source': 'shops',
+              'paint': {
+                  'circle-radius': 8,
+                  'circle-stroke-width': 2,
+                  'circle-color': 'blue',
+                  'circle-stroke-color': 'white'
+              }
+          });
+
+          map.addSource('vets', {
+              type: 'geojson',
+              data: vets
+          });
+
+          map.addLayer({
+              'id': 'vets-layer',
+              'type': 'circle',
+              'source': 'vets',
+              'paint': {
+                  'circle-radius': 8,
+                  'circle-stroke-width': 2,
+                  'circle-color': 'red',
+                  'circle-stroke-color': 'white'
+              }
+          });
+
+
+          map.addSource('parks', {
+              type: 'geojson',
+              data: parks
+          });
+
+          map.addLayer({
+              'id': 'park-layer',
+              'type': 'fill',
+              'source': 'parks',
+              'paint': {
+                  'fill-color': '#0080ff', // blue color fill
+                  'fill-opacity': 0.5
+              }
+          });
+
         });
+      }
 
-        map.addLayer(
-          {
-            'id': 'isoLayer',
-            'type': 'fill',
-            'source': 'iso',
-            'layout': {},
-            'paint': {
-              'fill-color': '#5a3fc0',
-              'fill-opacity': 0.3
-            }
-          },
-          'poi-label'
-        );
-
-        // Initialize the marker at the query coordinates
-        marker.setLngLat(lngLat).addTo(map);
-
-        // Make the API call
-        getIso();
-        getLocation();
-      });
+      loadMap();
+      
       
     </script>
   </body>
