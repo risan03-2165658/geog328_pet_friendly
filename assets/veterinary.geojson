@@ -13,6 +13,7 @@
       },
       "properties": {
         "name": "Jet City Animal Clinic",
+        "address": "822 12th Ave, Seattle, WA 98122", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -40,6 +41,7 @@
       },
       "properties": {
         "name": "North Seattle Veterinary Clinic",
+        "address": "11032 8th Ave NE, Seattle, WA 98125", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -67,6 +69,7 @@
       },
       "properties": {
         "name": "Rainier Veterinary Hospital",
+        "address": "815 Rainier Ave S, Seattle, WA 98144", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -94,6 +97,7 @@
       },
       "properties": {
         "name": "Mercer Street Veterinary Hospital",
+        "address": "610 1st Ave N, Seattle, WA 98109", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -121,6 +125,7 @@
       },
       "properties": {
         "name": "Queen Anne Animal Clinic",
+        "address": "1800 Queen Anne Ave N, Seattle, WA 98109", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -148,6 +153,7 @@
       },
       "properties": {
         "name": "Eastlake Veterinary Hospital",
+        "address": "1536 Eastlake Ave E, Seattle, WA 98102", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -175,6 +181,7 @@
       },
       "properties": {
         "name": "Atlantic Veterinary Hospital",
+        "address": "2115 23rd Ave S, Seattle, WA 98144", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -202,6 +209,7 @@
       },
       "properties": {
         "name": "Northeast Veterinary Hospital",
+        "address": "9505 35th Ave NE, Seattle, WA 98115", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -229,6 +237,7 @@
       },
       "properties": {
         "name": "Madison Street Animal Hospital",
+        "address": "2215 E Madison St, Seattle, WA 98112", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",
@@ -256,6 +265,7 @@
       },
       "properties": {
         "name": "Lake Union Veterinary Clinic",
+        "address": "1222 Republican St, Seattle, WA 98109", 
         "styleUrl": "#icon-1899-0288D1-nodesc",
         "icon-opacity": 1,
         "icon-color": "#0288d1",

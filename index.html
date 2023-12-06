@@ -194,6 +194,35 @@
             'poi-label'
           );
 
+        // risa ability to click the point and give info on the name and address as a popup
+        // for pet shop
+        map.on('click', 'shops-layer', (e) => {
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const shopInfo = e.features[0].properties;
+            const shopAddress = shopInfo.address; // Accessing the 'address' property
+
+            new mapboxgl.Popup({
+                maxWidth: '400px', // Adjust the width as needed
+            })
+            .setLngLat(coordinates)
+            .setHTML(`<h3>Pet Shop</h3><h3>Name: ${shopInfo.name}</h3><p>Address: ${shopAddress}</p>`)
+            .addTo(map);
+        });
+
+        // For veterinary
+        map.on('click', 'vets-layer', (e) => {
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const vetInfo = e.features[0].properties;
+            const vetAddress = vetInfo.address; // Accessing the 'address' property
+
+            new mapboxgl.Popup({
+                maxWidth: '400px', // Adjust the width as needed
+            })
+            .setLngLat(coordinates)
+            .setHTML(`<h2>Veterinary Clinic</h2><h3>Name: ${vetInfo.name}</h3><p>Address: ${vetAddress}</p>`)
+            .addTo(map);
+        });
+
           // Initialize the marker at the query coordinates
           marker.setLngLat(lngLat).addTo(map);
 
