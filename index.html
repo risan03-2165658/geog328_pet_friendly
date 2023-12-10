@@ -224,11 +224,9 @@
          });
          });
          
-         
-         
            // risa ability to click the point and give info on the name and address as a popup
            // for pet shop
-           map.on('click', 'shops-layer', (e) => {
+           map.on('click', 'shops-icon-layer', (e) => {
                const coordinates = e.features[0].geometry.coordinates.slice();
                const shopInfo = e.features[0].properties;
                const shopAddress = shopInfo.address; // Accessing the 'address' property
@@ -242,7 +240,7 @@
            });
          
            // For veterinary
-           map.on('click', 'vets-layer', (e) => {
+           map.on('click', 'vets-icon-layer', (e) => {
                const coordinates = e.features[0].geometry.coordinates.slice();
                const vetInfo = e.features[0].properties;
                const vetAddress = vetInfo.address; // Accessing the 'address' property
@@ -261,7 +259,8 @@
              // Make the API call
              getIso();
              getLocation();
-                 
+         
+         
              map.addSource('parks', {
                  type: 'geojson',
                  data: parks
