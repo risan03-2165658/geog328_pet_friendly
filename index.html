@@ -261,43 +261,7 @@
              // Make the API call
              getIso();
              getLocation();
-         
-         
-             map.addSource('shops', {
-                 type: 'geojson',
-                 data: shops
-             });
-         
-             map.addLayer({
-                 'id': 'shops-layer',
-                 'type': 'circle',
-                 'source': 'shops',
-                 'paint': {
-                     'circle-radius': 8,
-                     'circle-stroke-width': 2,
-                     'circle-color': 'blue',
-                     'circle-stroke-color': 'white'
-                 }
-             });
-         
-             map.addSource('vets', {
-                 type: 'geojson',
-                 data: vets
-             });
-         
-             map.addLayer({
-                 'id': 'vets-layer',
-                 'type': 'circle',
-                 'source': 'vets',
-                 'paint': {
-                     'circle-radius': 8,
-                     'circle-stroke-width': 2,
-                     'circle-color': 'red',
-                     'circle-stroke-color': 'white'
-                 }
-             });
-         
-         
+                 
              map.addSource('parks', {
                  type: 'geojson',
                  data: parks
