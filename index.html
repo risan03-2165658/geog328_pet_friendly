@@ -187,7 +187,8 @@
          }, 'poi-label');
          
          // Load and add pet shop icon
-         map.loadImage('https://static.vecteezy.com/system/resources/previews/015/604/287/original/pet-shop-icon-outline-style-vector.jpg', function(error, image) { // Replace with your path or URL
+         //https://static.vecteezy.com/system/resources/previews/015/604/287/original/pet-shop-icon-outline-style-vector.jpg
+         map.loadImage('https://cdn-icons-png.flaticon.com/512/3028/3028549.png', function(error, image) { // Replace with your path or URL
          if (error) throw error;
          map.addImage('shop-icon', image);
          
@@ -200,13 +201,14 @@
            },
            'layout': {
              'icon-image': 'shop-icon',
-             'icon-size': 0.02
+             'icon-size': 0.06
            }
          });
          });
          
          // Load and add veterinary clinic icon
-         map.loadImage('https://png.pngtree.com/png-vector/20191030/ourmid/pngtree-hospital-icon-png-image_1922195.jpg', function(error, image) { // Replace with your path or URL
+         //https://png.pngtree.com/png-vector/20191030/ourmid/pngtree-hospital-icon-png-image_1922195.jpg
+         map.loadImage('https://cdn-icons-png.flaticon.com/512/4320/4320350.png', function(error, image) { // Replace with your path or URL
          if (error) throw error;
          map.addImage('hospital-icon', image);
          
@@ -219,7 +221,7 @@
            },
            'layout': {
              'icon-image': 'hospital-icon',
-             'icon-size': 0.1
+             'icon-size': 0.055
            }
          });
          });
