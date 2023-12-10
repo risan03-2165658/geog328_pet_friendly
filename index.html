@@ -237,7 +237,7 @@
                    maxWidth: '400px', // Adjust the width as needed
                })
                .setLngLat(coordinates)
-               .setHTML(`<h3>Pet Shop</h3><h3>Name: ${shopInfo.name}</h3><p>Address: ${shopAddress}</p>`)
+               .setHTML(`<h4><i>Pet Shop</i></h4><h3>Name: <b>${shopInfo.name}</b></h3><p>Address: <b>${shopAddress}</b></p>`)
                .addTo(map);
            });
          
@@ -251,7 +251,7 @@
                    maxWidth: '400px', // Adjust the width as needed
                })
                .setLngLat(coordinates)
-               .setHTML(`<h2>Veterinary Clinic</h2><h3>Name: ${vetInfo.name}</h3><p>Address: ${vetAddress}</p>`)
+               .setHTML(`<h4><i>Veterinary Clinic</i></h4><h3>Name: <b>${vetInfo.name}</b></h3><p>Address: <b>${vetAddress}</b></p>`)
                .addTo(map);
            });
          
