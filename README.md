@@ -45,5 +45,7 @@ This project is built using several key technologies:
 ## Acknowledgements
 Special thanks to Professor Zhao and TA Liz Peng for their guidance and support in the GEOG 328 course. Appreciation is also extended to the creators of the 'Pet Resource Web Map' for their inspirational work in the field of pet-friendly mapping in Seattle.
 
+Additionally, we acknowledge the [Pet Resource Web Map](https://www.arcgis.com/apps/webappviewer/index.html?id=7639a0ab24cb49138bd4bf9995b1c193) that offers a detailed representation of pet resources in the Seattle area using ArcGIS. This resource inspired our decision to incorporate a similar mapping approach in our final deliverable, aiming to showcase pet-related amenities such as pet shops and healthcare institutions within the Seattle region. These resources were instrumental in shaping our project methodology and presentation, and we are grateful for the valuable insights they provided."
+
 ## Additional Notes
 This project was collaboratively developed by Anthony Kim, Eli Henry Lockard, Franck Kepnang, Matthew Joon Ro, and Risa Nabari. Our aim is not just to provide information but to enhance the pet-friendly community in Seattle.
