@@ -2,7 +2,7 @@
 <html lang="en">
    <head>
       <meta charset="utf-8" />
-      <title>Demo: Get started with the Isochrone API</title>
+      <title>Pet Web Map (Seattle)</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <!-- Mapbox GL JS -->
       <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -22,14 +22,39 @@
          padding: 0;
          }
          #map {
-         position: absolute;
-         top: 0;
-         bottom: 0;
-         width: 100%;
+            position: absolute;
+            top: 40px; /* Adjust top position to accommodate the banner */
+            bottom: 0;
+            width: 100%;
          }
+         
+         .banner {/* Adjust the aesthetics of title */
+            background-color: #314ccd; /* Background color for the banner */
+            color: #fff; /* Text color */
+            padding: 10px 20px; /* Adjust padding as needed */
+            text-align: center;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure the banner is above the map */
+         }
+         .banner h1 {
+            font-size: 24px; /* Adjust the font size as desired */
+            font-weight: bold; /* Make the text bold */
+            margin: 0; /* Remove default margin to ensure proper alignment */
+         }
+         .my24 {
+              margin-top: 80px; /* Increase the margin-top value to move the box further down */
+              margin-bottom: 24px;
+              position: relative;
+              top: 80px; /*  adjust the element's position */
+          }
       </style>
    </head>
    <body>
+    <div class="banner">
+      <h1>Pet-Friendly Web Map of Seattle</h1>
+   </div>
       <div id="map"></div>
       <div class="absolute fl my24 mx24 py24 px24 bg-gray-faint round">
          <form id="params">
@@ -129,8 +154,6 @@
            }
            getIso();
          });
-         
-
         
          // Function to get user's current location
          function getLocation() {
@@ -311,3 +334,4 @@
       </script>
    </body>
 </html>
+
