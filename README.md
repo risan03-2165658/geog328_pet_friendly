@@ -6,15 +6,15 @@ The Pet-Friendly Web Map of Seattle is a comprehensive and easily accessible res
 ## Project Goals
 The overarching aim of this web map is to enhance the pet-friendly environment of Seattle by providing a comprehensive and easy-accesible tool. Our map encourages pet owners and enthusiasts to explore and engage with different areas of Seattle, promoting a broader understanding and appreciation of the city's pet-friendly offerings. Our project also serves as a decision-making tool, providing pet owners with valuable information about pet resources, such as the proximity of parks, pet stores, and veterinary clinics. Such details are not only vital for day-to-day pet care but also imperative in emergency situations. Through these resources, we aim to assist individuals considering pet adoption in making informed decisions. By showcasing available resources and services, we provide a clearer picture of what pet ownership in Seattle entails, thereby facilitating responsible and well-informed pet adoption. By providing detailed information about each pet service, we aim to inform users about various aspects of pet care and the availability of resources in their area. Overall, this map helps us encourage responsible pet ownership, in Seattle, by making it easier for owners to access the services and information they need to care for their pets properly.
 
-# Application URL
+## Application URL
 [Pet-Friendly Web Map of Seattle](https://risan03-2165658.github.io/geog328_pet_friendly/index.html)
 
-# Screenshots
-1. ![alt text](/Users/amk/Downloads/Workspace/geog328_pet_friendly/img/example1.png)
+## Screenshots
+1. ![Map View](https://github.com/your-username/your-repo-name/blob/main/img/example1.png?raw=true)
 
-2. ![alt text](/Users/amk/Downloads/Workspace/geog328_pet_friendly/img/example2.png)
+2. ![Detailed View](https://github.com/your-username/your-repo-name/blob/main/img/example2.png?raw=true)
 
-# Main functions
+## Main functions
 The main features of the map include:
 
 * Customizable Widget: The widget, crafted with HTML and CSS, allows users to select their preferred mode of transportation and travel time. JavaScript event listeners handle user input, adjusting the map polygon display accordingly.
@@ -27,10 +27,10 @@ The main features of the map include:
 
 * User Location Detection: The web map leverages the Geolocation API to fetch the user's current location, offering personalized resource suggestions based on their position.
 
-# Data Sources
+## Data Sources
 The project leverages various datasets, including city park data from the Seattle City GIS, pet shops and veterinary clinics data from Google My Maps, and more, to provide a comprehensive view of pet-friendly locations.
 
-# Applied Libraries and Web Services
+## Applied Libraries and Web Services
 This project is built using several key technologies:
 
 * Mapbox GL JS: For creating and manipulating the interactive map.
@@ -38,8 +38,8 @@ This project is built using several key technologies:
 * Google My Maps: For custom mapping data.
 * Turf.js: For GIS data processing and spatial analysis.
 
-# Acknowledgements
+## Acknowledgements
 Special thanks to Professor Zhao and TA Liz Peng for their guidance and support in the GEOG 328 course. Appreciation is also extended to the creators of the 'Pet Resource Web Map' for their inspirational work in the field of pet-friendly mapping in Seattle.
 
-# Additional Notes
+## Additional Notes
 This project was collaboratively developed by Anthony Kim, Eli Henry Lockard, Franck Kepnang, Matthew Joon Ro, and Risa Nabari. Our aim is not just to provide information but to enhance the pet-friendly community in Seattle.
