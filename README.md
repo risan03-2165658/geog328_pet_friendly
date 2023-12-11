@@ -15,7 +15,8 @@ The overarching aim of this web map is to enhance the pet-friendly environment o
 
 
 2. Detailed View:
-<img width="1439" alt="Screen Shot 2023-12-11 at 3 22 20 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/994abcb2-8342-4945-a185-c7c16a9f8ebf">
+<img width="1400" alt="Screen Shot 2023-12-11 at 6 43 06 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/dd28456d-5544-4253-be6d-e9f3fd1c567a">
+
 
 ## Main functions
 The main features of the map include:
