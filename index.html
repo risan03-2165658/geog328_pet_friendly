@@ -16,6 +16,8 @@
          rel="stylesheet"
          />
       <script src="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.js"></script>
+      <!--turf.js-->
+      <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
       <style>
          body {
          margin: 0;
@@ -114,7 +116,7 @@
          
          // Target the params form in the HTML
          const params = document.getElementById('params');
-         
+
          // Create variables to use in getIso()
          const urlBase = 'https://api.mapbox.com/isochrone/v1/mapbox/';
          let lon = -77.034;
@@ -143,7 +145,32 @@
            const data = await query.json();
            // Set the 'iso' source's data to what's returned by the API query
            map.getSource('iso').setData(data);
+           return data;
          }
+
+        //Calls getIso() and filters datasets for recources within the isochrone
+        async function getIsoWrapper() {
+          let iso = await getIso();
+          let response, parks, shops, vets;
+          if (parks === undefined) {
+            response = await fetch('assets/pet_shops.geojson');
+            shops = await response.json();
+            response = await fetch('assets/veterinary.geojson');
+            vets = await response.json();
+            response = await fetch('assets/off_leash_parks.geojson');
+            parks = await response.json();
+          };
+          
+          let shopsFiltered = shops.features.filter((feature) => turf.booleanIntersects(turf.point(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+          shops.features = shopsFiltered;
+          map.getSource('shops').setData(shops);
+          let vetsFiltered = vets.features.filter((feature) => turf.booleanIntersects(turf.point(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+          vets.features = vetsFiltered;
+          map.getSource('vets').setData(vets);
+          let parksFiltered = parks.features.filter((feature) => turf.booleanIntersects(turf.multiPolygon(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+          parks.features = parksFiltered;
+          map.getSource('parks').setData(parks);
+        }
          
          // When a user changes the value of profile or duration by clicking a button, change the parameter's value and make the API query again
          params.addEventListener('change', (event) => {
@@ -152,7 +179,7 @@
            } else if (event.target.name === 'duration') {
              minutes = event.target.value;
            }
-           getIso();
+           getIsoWrapper();//getIso();
          });
         
          // Function to get user's current location
@@ -174,7 +201,7 @@
            marker.setLngLat([lon, lat]);
          
            // Call the Isochrone API with the new position
-           getIso();
+           getIsoWrapper();//getIso();
          }
          
          function showError(error) {
@@ -194,129 +221,147 @@
            }
          }
          async function loadMap() {
-         let response, parks, shops, vets;
-         response = await fetch('assets/pet_shops.geojson');
-         shops = await response.json();
-         response = await fetch('assets/veterinary.geojson');
-         vets = await response.json();
-         response = await fetch('assets/off_leash_parks.geojson');
-         parks = await response.json();
+          let response, parks, shops, vets;
+          response = await fetch('assets/pet_shops.geojson');
+          shops = await response.json();
+          response = await fetch('assets/veterinary.geojson');
+          vets = await response.json();
+          response = await fetch('assets/off_leash_parks.geojson');
+          parks = await response.json();
          
-         map.on('load', () => {
-         // When the map loads, add the source and layer
-         map.addSource('iso', {
-         type: 'geojson',
-         data: {
-           'type': 'FeatureCollection',
-           'features': []
-         }      
-         });
+          map.on('load', () => {
+          // When the map loads, add the source and layer
+          map.addSource('iso', {
+          type: 'geojson',
+          data: {
+            'type': 'FeatureCollection',
+            'features': []
+          }      
+          });
          
-         map.addLayer({
-         'id': 'isoLayer',
-         'type': 'fill',
-         'source': 'iso',
-         'layout': {},
-         'paint': {
-           'fill-color': '#5a3fc0',
-           'fill-opacity': 0.3
-         }
-         }, 'poi-label');
+          map.addLayer({
+          'id': 'isoLayer',
+          'type': 'fill',
+          'source': 'iso',
+          'layout': {},
+          'paint': {
+            'fill-color': '#5a3fc0',
+            'fill-opacity': 0.3
+          }
+          }, 'poi-label');
 
-         // Load and add pet shop icon
-         //https://static.vecteezy.com/system/resources/previews/015/604/287/original/pet-shop-icon-outline-style-vector.jpg
-         map.loadImage('https://cdn-icons-png.flaticon.com/512/3028/3028549.png', function(error, image) { // Replace with your path or URL
-         if (error) throw error;
-         map.addImage('shop-icon', image);
-         
-         map.addLayer({
-           'id': 'shops-icon-layer',
-           'type': 'symbol',
-           'source': {
-             'type': 'geojson',
-             'data': shops
-           },
-           'layout': {
-             'icon-image': 'shop-icon',
-             'icon-size': 0.06
-           }
-         });
-         });
-         
-         // Load and add veterinary clinic icon
-         //https://png.pngtree.com/png-vector/20191030/ourmid/pngtree-hospital-icon-png-image_1922195.jpg
-         map.loadImage('https://cdn-icons-png.flaticon.com/512/4320/4320350.png', function(error, image) { // Replace with your path or URL
-         if (error) throw error;
-         map.addImage('hospital-icon', image);
-         
-         map.addLayer({
-           'id': 'vets-icon-layer',
-           'type': 'symbol',
-           'source': {
-             'type': 'geojson',
-             'data': vets
-           },
-           'layout': {
-             'icon-image': 'hospital-icon',
-             'icon-size': 0.055
-           }
-         });
-         });
+          map.addSource('shops', {
+              type: 'geojson',
+              data: shops
+          });
+        
+          map.addSource('vets', {
+              type: 'geojson',
+              data: vets
+          });
 
-           // risa ability to click the point and give info on the name and address as a popup
-           // for pet shop
-           map.on('click', 'shops-icon-layer', (e) => {
-               const coordinates = e.features[0].geometry.coordinates.slice();
-               const shopInfo = e.features[0].properties;
-               const shopAddress = shopInfo.address; // Accessing the 'address' property
-         
-               new mapboxgl.Popup({
-                   maxWidth: '400px', // Adjust the width as needed
-               })
-               .setLngLat(coordinates)
-               .setHTML(`<h4><i>Pet Shop</i></h4><h3>Name: <b>${shopInfo.name}</b></h3><p>Address: <b>${shopAddress}</b></p>`)
-               .addTo(map);
-           });
-         
-           // For veterinary
-           map.on('click', 'vets-icon-layer', (e) => {
-               const coordinates = e.features[0].geometry.coordinates.slice();
-               const vetInfo = e.features[0].properties;
-               const vetAddress = vetInfo.address; // Accessing the 'address' property
-         
-               new mapboxgl.Popup({
-                   maxWidth: '400px', // Adjust the width as needed
-               })
-               .setLngLat(coordinates)
-               .setHTML(`<h4><i>Veterinary Clinic</i></h4><h3>Name: <b>${vetInfo.name}</b></h3><p>Address: <b>${vetAddress}</b></p>`)
-               .addTo(map);
-           });
-         
-             // Initialize the marker at the query coordinates
-             marker.setLngLat(lngLat).addTo(map);
-         
-             // Make the API call
-             getIso();
-             getLocation();
-    
-             map.addSource('parks', {
-                 type: 'geojson',
-                 data: parks
-             });
-         
-             map.addLayer({
-                 'id': 'park-layer',
-                 'type': 'fill',
-                 'source': 'parks',
-                 'paint': {
-                     'fill-color': '#0080ff', // blue color fill
-                     'fill-opacity': 0.5
-                 }
-             });
+          map.addSource('parks', {
+                type: 'geojson',
+                data: parks
+            });
 
-           });
-         }
-         loadMap();
+          // Load and add pet shop icon
+          //https://static.vecteezy.com/system/resources/previews/015/604/287/original/pet-shop-icon-outline-style-vector.jpg
+          map.loadImage('https://cdn-icons-png.flaticon.com/512/3028/3028549.png', function(error, image) { // Replace with your path or URL
+          if (error) throw error;
+          map.addImage('shop-icon', image);
+
+            // Load and add veterinary clinic icon
+          //https://png.pngtree.com/png-vector/20191030/ourmid/pngtree-hospital-icon-png-image_1922195.jpg
+          map.loadImage('https://cdn-icons-png.flaticon.com/512/4320/4320350.png', function(error, image) { // Replace with your path or URL
+          if (error) throw error;
+          map.addImage('hospital-icon', image);
+
+          map.addLayer({
+                'id': 'park-layer',
+                'type': 'fill',
+                'source': 'parks',
+                'paint': {
+                    'fill-color': '#0080ff', // blue color fill
+                    'fill-opacity': 0.5
+                }
+            });
+          
+          map.addLayer({
+            'id': 'shops-icon-layer',
+            'type': 'symbol',
+            'source': 'shops',
+            'layout': {
+              'icon-image': 'shop-icon',
+              'icon-size': 0.06
+            }
+          });
+          });
+          
+          map.addLayer({
+            'id': 'vets-icon-layer',
+            'type': 'symbol',
+            'source': 'vets',
+            'layout': {
+              'icon-image': 'hospital-icon',
+              'icon-size': 0.055
+            }
+          });
+          });
+
+            // risa ability to click the point and give info on the name and address as a popup
+            // for pet shop
+            map.on('click', 'shops-icon-layer', (e) => {
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const shopInfo = e.features[0].properties;
+                const shopAddress = shopInfo.address; // Accessing the 'address' property
+          
+                new mapboxgl.Popup({
+                    maxWidth: '400px', // Adjust the width as needed
+                })
+                .setLngLat(coordinates)
+                .setHTML(`<h4><i>Pet Shop</i></h4><h3>Name: <b>${shopInfo.name}</b></h3><p>Address: <b>${shopAddress}</b></p>`)
+                .addTo(map);
+            });
+          
+            // For veterinary
+            map.on('click', 'vets-icon-layer', (e) => {
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const vetInfo = e.features[0].properties;
+                const vetAddress = vetInfo.address; // Accessing the 'address' property
+          
+                new mapboxgl.Popup({
+                    maxWidth: '400px', // Adjust the width as needed
+                })
+                .setLngLat(coordinates)
+                .setHTML(`<h4><i>Veterinary Clinic</i></h4><h3>Name: <b>${vetInfo.name}</b></h3><p>Address: <b>${vetAddress}</b></p>`)
+                .addTo(map);
+            });
+
+            map.on('click', 'park-layer', (e) => {
+                const parkInfo = e.features[0].properties;
+                const parkName = parkInfo.NAME; // Accessing the 'name' property
+
+                new mapboxgl.Popup({
+                    maxWidth: '400px', // Adjust the width as needed
+                })
+                .setLngLat(e.lngLat)
+                .setHTML(`<h2><i>Park<i></h2><h3>Name: <b>${parkName}<b></h3>`)
+                .addTo(map);
+            });
+          
+              // Initialize the marker at the query coordinates
+              marker.setLngLat(lngLat).addTo(map);
+          
+              // Make the API call
+              getIsoWrapper();//getIso();
+              getLocation();
+      
+              
+
+            });
+        }
+        loadMap();
 
           // Initialize the checkboxes for Pet Resources 
           // users can click the pet shops or vet clincs to show or hide the icon associated to the variables
