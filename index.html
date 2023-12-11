@@ -59,6 +59,13 @@
    </div>
       <div id="map"></div>
       <div class="absolute fl my24 mx24 py24 px24 bg-gray-faint round">
+         <h4 class="txt-m txt-bold mb6">Toggle Travel Distance:</h4>
+         <div class="mb12 mr12 toggle-group align-center">
+            <label class="toggle-container">
+                <input name="iso-toggle" type="checkbox" value="isochrone" checked />
+                <div id="iso-div" class="toggle toggle--active-null toggle--null">On</div>
+            </label>
+         </div>
          <form id="params">
             <h4 class="txt-m txt-bold mb6">Choose a travel mode:</h4>
             <div class="mb12 mr12 toggle-group align-center">
@@ -160,16 +167,30 @@
             response = await fetch('assets/off_leash_parks.geojson');
             parks = await response.json();
           };
-          
-          let shopsFiltered = shops.features.filter((feature) => turf.booleanIntersects(turf.point(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
-          shops.features = shopsFiltered;
-          map.getSource('shops').setData(shops);
-          let vetsFiltered = vets.features.filter((feature) => turf.booleanIntersects(turf.point(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
-          vets.features = vetsFiltered;
-          map.getSource('vets').setData(vets);
-          let parksFiltered = parks.features.filter((feature) => turf.booleanIntersects(turf.multiPolygon(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
-          parks.features = parksFiltered;
-          map.getSource('parks').setData(parks);
+
+          const isoViz = map.getLayoutProperty(
+            'isoLayer',
+            'visibility'
+          );
+
+          if (isoViz === 'visible') {
+            let shopsFiltered = shops.features.filter((feature) => turf.booleanIntersects(turf.point(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+            let isoShops = shops;
+            isoShops.features = shopsFiltered;
+            map.getSource('shops').setData(isoShops);
+            let vetsFiltered = vets.features.filter((feature) => turf.booleanIntersects(turf.point(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+            let isoVets = vets;
+            isoVets.features = vetsFiltered;
+            map.getSource('vets').setData(isoVets);
+            let parksFiltered = parks.features.filter((feature) => turf.booleanIntersects(turf.multiPolygon(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+            let isoParks = parks;
+            isoParks.features = parksFiltered;
+            map.getSource('parks').setData(isoParks);
+          } else {
+            map.getSource('shops').setData(shops);
+            map.getSource('vets').setData(vets);
+            map.getSource('parks').setData(parks);
+          } 
         }
          
          // When a user changes the value of profile or duration by clicking a button, change the parameter's value and make the API query again
@@ -243,7 +264,9 @@
           'id': 'isoLayer',
           'type': 'fill',
           'source': 'iso',
-          'layout': {},
+          'layout': {
+            'visibility': 'visible'
+          },
           'paint': {
             'fill-color': '#5a3fc0',
             'fill-opacity': 0.3
@@ -375,7 +398,34 @@
                 map.setLayoutProperty(layerId, 'visibility', visibility);
               });
           });
-         
+
+          //Initializes toggle for the isochrone, changes button text, and reloads data on map
+          const isoToggle = document.querySelectorAll('input[name="iso-toggle"]');
+          isoToggle[0].checked = true;
+          isoToggle[0].addEventListener('change', () => {
+            let text = document.getElementById('iso-div').innerHTML;
+            if (text === 'On') {
+              document.getElementById('iso-div').innerHTML = 'Off'
+            } else {
+              document.getElementById('iso-div').innerHTML = 'On';
+            }
+            const isoViz = map.getLayoutProperty(
+              'isoLayer',
+              'visibility'
+            );
+
+            if (isoViz === 'visible') {
+              map.setLayoutProperty('isoLayer', 'visibility', 'none');
+            } else {
+              map.setLayoutProperty(
+              'isoLayer',
+              'visibility',
+              'visible'
+              );
+            }
+
+            getIsoWrapper();
+          });
       </script>
    </body>
 </html>
