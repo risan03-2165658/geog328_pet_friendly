@@ -10,9 +10,11 @@ The overarching aim of this web map is to enhance the pet-friendly environment o
 [Pet-Friendly Web Map of Seattle](https://risan03-2165658.github.io/geog328_pet_friendly/index.html)
 
 ## Screenshots
-1. <img width="1439" alt="Screen Shot 2023-12-11 at 3 22 05 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/f91f5e5e-af52-43cd-a5ea-231d6b3424c5">
+1. Example 1:
+<img width="1439" alt="Screen Shot 2023-12-11 at 3 22 05 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/f91f5e5e-af52-43cd-a5ea-231d6b3424c5">
 
-2. <img width="1439" alt="Screen Shot 2023-12-11 at 3 22 20 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/994abcb2-8342-4945-a185-c7c16a9f8ebf">
+2. Example 2:
+<img width="1439" alt="Screen Shot 2023-12-11 at 3 22 20 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/994abcb2-8342-4945-a185-c7c16a9f8ebf">
 
 ## Main functions
 The main features of the map include:
