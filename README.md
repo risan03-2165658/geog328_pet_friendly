@@ -1,21 +1,21 @@
 # Pet-Friendly Web Map of Seattle
 
 ## Project Description
-The Pet-Friendly Web Map of Seattle is a comprehensive and easily accessible resource to aid pet owners, future pet owners, as well as the general public who are interested in exploring and navigating information on pets in the Seattle area. The map overall is a dynamic and interactive web mapping tool designed for pet owners who may be interested in considering pet adoption in Seattle. It displays various pet resources such as pet shops, parks, and veterinary clinics, based on the user's location. The map facilitates the exploration of pet-friendly services and amenities within the city, enhancing the pet ownership experience.
+The Pet-Friendly Web Map of Seattle is a comprehensive and easily accessible resource to aid pet owners, future pet owners, as well as the general public who are interested in exploring and navigating information on pets in the Seattle area. The map overall is a dynamic and interactive web mapping tool designed for pet owners interested in pet adoption in Seattle. It displays various pet resources such as pet shops, parks, and veterinary clinics, based on the user's location. The map facilitates the exploration of pet-friendly services and amenities within the city, enhancing the pet ownership experience.
 
 ## Project Goals
-The overarching aim of this web map is to enhance the pet-friendly environment of Seattle by providing a comprehensive and easy-accesible tool. Our map encourages pet owners and enthusiasts to explore and engage with different areas of Seattle, promoting a broader understanding and appreciation of the city's pet-friendly offerings. Our project also serves as a decision-making tool, providing pet owners with valuable information about pet resources, such as the proximity of parks, pet stores, and veterinary clinics. Such details are not only vital for day-to-day pet care but also imperative in emergency situations. Through these resources, we aim to assist individuals considering pet adoption in making informed decisions. By showcasing available resources and services, we provide a clearer picture of what pet ownership in Seattle entails, thereby facilitating responsible and well-informed pet adoption. By providing detailed information about each pet service, we aim to inform users about various aspects of pet care and the availability of resources in their area. Overall, this map helps us encourage responsible pet ownership, in Seattle, by making it easier for owners to access the services and information they need to care for their pets properly.
+The overarching aim of this web map is to enhance the pet-friendly environment of Seattle by providing a comprehensive and easy-accessible tool. Our map encourages pet owners and enthusiasts to explore and engage with different areas of Seattle, promoting a broader understanding and appreciation of the city's pet-friendly offerings. Our project also serves as a decision-making tool, providing pet owners with valuable information about pet resources, such as the proximity of parks, pet stores, and veterinary clinics. Such details are not only vital for day-to-day pet care but also imperative in emergencies. Through these resources, we aim to assist individuals considering pet adoption in making informed decisions. By showcasing available resources and services, we provide a clearer picture of what pet ownership in Seattle entails, thereby facilitating responsible and well-informed pet adoption. By providing detailed information about each pet service, we aim to inform users about various aspects of pet care and the availability of resources in their area. Overall, this map helps us encourage responsible pet ownership, in Seattle, by making it easier for owners to access the services and information they need to care for their pets properly.
 
 ## Application URL
 [Pet-Friendly Web Map of Seattle](https://risan03-2165658.github.io/geog328_pet_friendly/index.html)
 
 ## Screenshots
 1. Map View:
-<img width="1439" alt="Screen Shot 2023-12-11 at 3 22 05 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/f91f5e5e-af52-43cd-a5ea-231d6b3424c5">
+<img width="1250" alt="Screen Shot 2023-12-11 at 3 22 05 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/f91f5e5e-af52-43cd-a5ea-231d6b3424c5">
 
 
 2. Detailed View:
-<img width="1400" alt="Screen Shot 2023-12-11 at 6 43 06 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/dd28456d-5544-4253-be6d-e9f3fd1c567a">
+<img width="1250" alt="Screen Shot 2023-12-11 at 6 43 06 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/dd28456d-5544-4253-be6d-e9f3fd1c567a">
 
 
 ## Main functions
