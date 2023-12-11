@@ -64,6 +64,18 @@
                </label>
             </div>
          </form>
+         <h4 class="txt-m txt-bold mb6">Pet Resources:</h4>
+         <div class="mb12 mr12 toggle-group align-center">
+            <label class="toggle-container">
+               <input name="pet-resource" type="checkbox" value="veterinary" checked />
+               <div class="toggle toggle--active-null toggle--null">Veterinary Clinics</div>
+            </label>
+            <label class="toggle-container">
+               <input name="pet-resource" type="checkbox" value="pet-shop" checked />
+               <div class="toggle toggle--active-null toggle--null">Pet Shops</div>
+            </label>
+         </div>
+
       </div>
       <script>
          mapboxgl.accessToken = 'pk.eyJ1IjoiY2xpcDM2IiwiYSI6ImNrbGQwbHkyODQzeXAyd3Vpbm0zcmtjZjMifQ.CP1WgT3qS4809VGPhGElJA';
@@ -118,6 +130,8 @@
            getIso();
          });
          
+
+        
          // Function to get user's current location
          function getLocation() {
            if (navigator.geolocation) {
@@ -185,7 +199,7 @@
            'fill-opacity': 0.3
          }
          }, 'poi-label');
-         
+
          // Load and add pet shop icon
          //https://static.vecteezy.com/system/resources/previews/015/604/287/original/pet-shop-icon-outline-style-vector.jpg
          map.loadImage('https://cdn-icons-png.flaticon.com/512/3028/3028549.png', function(error, image) { // Replace with your path or URL
@@ -225,7 +239,7 @@
            }
          });
          });
-         
+
            // risa ability to click the point and give info on the name and address as a popup
            // for pet shop
            map.on('click', 'shops-icon-layer', (e) => {
@@ -261,8 +275,7 @@
              // Make the API call
              getIso();
              getLocation();
-         
-         
+    
              map.addSource('parks', {
                  type: 'geojson',
                  data: parks
@@ -277,9 +290,23 @@
                      'fill-opacity': 0.5
                  }
              });
+
            });
          }
          loadMap();
+
+          // Initialize the checkboxes for Pet Resources 
+          // users can click the pet shops or vet clincs to show or hide the icon associated to the variables
+          const checkboxes = document.querySelectorAll('input[name="pet-resource"]');
+          checkboxes.forEach((checkbox) => {
+              checkbox.checked = true; // Check the checkboxes by default
+              checkbox.addEventListener('change', () => {
+                // Control the visibility of pet shops and vet clinics layers based on checkbox state
+                const layerId = checkbox.value === 'veterinary' ? 'vets-icon-layer' : 'shops-icon-layer';
+                const visibility = checkbox.checked ? 'visible' : 'none';
+                map.setLayoutProperty(layerId, 'visibility', visibility);
+              });
+          });
          
       </script>
    </body>
