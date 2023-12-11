@@ -14,7 +14,7 @@ The overarching aim of this web map is to enhance the pet-friendly environment o
 
 2. ![alt text](/Users/amk/Downloads/Workspace/geog328_pet_friendly/img/example2.png)
 
-# Main function
+# Main functions
 The main features of the map include:
 
 * Customizable Widget: The widget, crafted with HTML and CSS, allows users to select their preferred mode of transportation and travel time. JavaScript event listeners handle user input, adjusting the map polygon display accordingly.
