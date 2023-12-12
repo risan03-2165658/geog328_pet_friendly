@@ -17,6 +17,7 @@ The overarching aim of this web map is to enhance the pet-friendly environment o
 2. Detailed View:
 <img width="1250" alt="Screen Shot 2023-12-11 at 10 25 26 PM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/90a01e4a-5a15-4fd4-9289-0f747cc9fbe2">
 
+## Main functions
 * Customizable Widget: The widget, crafted with HTML and CSS, allows users to select their preferred mode of transportation and travel time. JavaScript event listeners handle user input, adjusting the map polygon display accordingly.
 
 * Interactive Map Interface: Implemented using Mapbox GL JS, providing a smooth and responsive user experience. Users can pan and zoom to explore different areas of Seattle.
@@ -37,6 +38,9 @@ This project is built using these several key technologies:
 * GitHub: For hosting and version control.
 * Google My Maps: For custom mapping data.
 * Turf.js: For GIS data processing and spatial analysis.
+
+## Limitations
+While the Pet-Friendly Web Map of Seattle offers numerous benefits, it's important to acknowledge the limitations of our project and data. Firstly, we believe the map is highly dependent on the accuracy of its current data sources. Any changes when updating information about pet resources, such as new pet shops or changes in store policies, might lead to outdated or incomplete information. Secondly, the map's functionality and user experience rely heavily on the user's internet connectivity and device capabilities. Users with slower internet connections or less advanced devices may face challenges in accessing or navigating the map effectively. Additionally, the map primarily caters to the Seattle area, potentially limiting its usefulness for visitors or new residents unfamiliar with the city's geography. Lastly, while the map provides location-based services, it doesn't account for the quality or reputation of the listed pet resources, which can be crucial for users making decisions about pet care. These limitations, while not undermining the project's overall value, are important considerations for users and developers alike in optimizing and utilizing the web map effectively.
 
 ## Acknowledgements
 Special thanks to Professor Zhao and TA Liz Peng for their guidance and support in the GEOG 328 course. Appreciation is also extended to the creators of the 'Pet Resource Web Map' for their inspirational work in the field of pet-friendly mapping in Seattle.
