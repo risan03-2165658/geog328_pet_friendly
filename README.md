@@ -1,7 +1,7 @@
 # Pet-Friendly Web Map of Seattle
 
 ## Project Description
-The Pet-Friendly Web Map of Seattle is a comprehensive and easily accessible resource to aid pet owners, future pet owners, as well as the general public who are interested in exploring and navigating information on pets in the Seattle area. The map overall is a dynamic and interactive web mapping tool designed for pet owners interested in pet adoption in Seattle. It displays various pet resources such as pet shops, parks, and veterinary clinics, based on the user's location. The map facilitates the exploration of pet-friendly services and amenities within the city, enhancing the pet ownership experience.
+The Pet-Friendly Web Map of Seattle is a comprehensive and easily accessible resource to aid pet owners, future pet owners, as well as the general public who are interested in exploring and navigating information on pets in the Seattle area. The map overall is a dynamic and interactive web mapping tool designed for pet owners interested in pet adoption in Seattle. This web map displays the various pet resources in Seattle such as pet shops, pet-friendly parks, and veterinary clinics, based on the user's location. The map facilitates the exploration of pet-friendly services and amenities within the city, enhancing the pet ownership experience.
 
 ## Project Goals
 The overarching aim of this web map is to enhance the pet-friendly environment of Seattle by providing a comprehensive and easy-accessible tool. Our map encourages pet owners and enthusiasts to explore and engage with different areas of Seattle, promoting a broader understanding and appreciation of the city's pet-friendly offerings. Our project also serves as a decision-making tool, providing pet owners with valuable information about pet resources, such as the proximity of parks, pet stores, and veterinary clinics. Such details are not only vital for day-to-day pet care but also imperative in emergencies. Through these resources, we aim to assist individuals considering pet adoption in making informed decisions. By showcasing available resources and services, we provide a clearer picture of what pet ownership in Seattle entails, thereby facilitating responsible and well-informed pet adoption. By providing detailed information about each pet service, we aim to inform users about various aspects of pet care and the availability of resources in their area. Overall, this map helps us encourage responsible pet ownership, in Seattle, by making it easier for owners to access the services and information they need to care for their pets properly. This map can also help the local government explore the topic of transportation accessibility for pet resources and areas that could use improvement.
@@ -29,13 +29,13 @@ The main features of the map include:
 
 * Dynamic Information Display: Click events on the map trigger pop-ups that display detailed information about each pet resource. This is achieved by attaching event listeners to map elements, fetching data from the GeoJSON files.
 
-* User Location Detection: The web map leverages the Geolocation API to fetch the user's current location, offering personalized resource suggestions based on their position.
+* User Location Detection: The web map leverages the Geolocation API to fetch the user's current location, offering personalized resource suggestions based on their position and making this a much more useful web map. 
 
 ## Data Sources
-The project leverages various datasets, including city park data from the Seattle City GIS, pet shops and veterinary clinics data from Google My Maps, and more, to provide a comprehensive view of pet-friendly locations.
+The project leverages various datasets, including city park data from the Seattle City GIS, pet shops and veterinary clinics location data created from Google My Maps, and more, to provide a comprehensive view of pet-friendly locations in Seattle.
 
 ## Applied Libraries and Web Services
-This project is built using several key technologies:
+This project is built using these several key technologies:
 
 * Mapbox GL JS: For creating and manipulating the interactive map.
 * GitHub: For hosting and version control.
