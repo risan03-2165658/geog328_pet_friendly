@@ -26,11 +26,7 @@ The overarching aim of this web map is to enhance the pet-friendly environment o
 
 * Location-Based Services: Utilizes GeoJSON data to pinpoint pet resources like shops and clinics on the map. The JavaScript fetch API is used to load GeoJSON files containing locations of pet resources.
 
-<<<<<<< HEAD
-* Dynamic Information Display: Click events on the map trigger pop-ups that display information about each pet resource. This is achieved by attaching event listeners to map elements, fetching data from the GeoJSON files.
-=======
 * Dynamic Information Display: Click on the icons on the map to trigger pop-ups that display detailed information about each pet resource. This is achieved by attaching event listeners to map elements, fetching data from the GeoJSON files.
->>>>>>> refs/remotes/origin/main
 
 * User Location Detection: The web map leverages the Geolocation API to fetch the user's current location, offering personalized resource suggestions based on the user's current location.
 
