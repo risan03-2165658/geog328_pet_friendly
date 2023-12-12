@@ -11,11 +11,12 @@ The overarching aim of this web map is to enhance the pet-friendly environment o
 
 ## Screenshots
 1. Map View:
-<img width="1250" alt="Screen Shot 2023-12-11 at 3 22 05 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/f91f5e5e-af52-43cd-a5ea-231d6b3424c5">
+<img width="1250" alt="Screen Shot 2023-12-11 at 10 25 12 PM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/b34c2e9f-76f6-417e-935e-44032b1c0408">
+3cd-a5ea-231d6b3424c5">
 
 
 2. Detailed View:
-<img width="1250" alt="Screen Shot 2023-12-11 at 6 43 06 AM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/dd28456d-5544-4253-be6d-e9f3fd1c567a">
+<img width="1250" alt="Screen Shot 2023-12-11 at 10 25 26 PM" src="https://github.com/risan03-2165658/geog328_pet_friendly/assets/77130958/90a01e4a-5a15-4fd4-9289-0f747cc9fbe2">
 
 
 ## Main functions
