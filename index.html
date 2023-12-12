@@ -16,6 +16,8 @@
          rel="stylesheet"
          />
       <script src="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.js"></script>
+      <!--turf.js-->
+      <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
       <style>
          body {
          margin: 0;
@@ -27,7 +29,7 @@
             bottom: 0;
             width: 100%;
          }
-         
+
          .banner {/* Adjust the aesthetics of title */
             background-color: #314ccd; /* Background color for the banner */
             color: #fff; /* Text color */
@@ -57,6 +59,13 @@
    </div>
       <div id="map"></div>
       <div class="absolute fl my24 mx24 py24 px24 bg-gray-faint round">
+         <h4 class="txt-m txt-bold mb6">Toggle Travel Distance:</h4>
+         <div class="mb12 mr12 toggle-group align-center">
+            <label class="toggle-container">
+                <input name="iso-toggle" type="checkbox" value="isochrone" checked />
+                <div id="iso-div" class="toggle toggle--active-null toggle--null">On</div>
+            </label>
+         </div>
          <form id="params">
             <h4 class="txt-m txt-bold mb6">Choose a travel mode:</h4>
             <div class="mb12 mr12 toggle-group align-center">
@@ -104,36 +113,36 @@
       </div>
       <script>
          mapboxgl.accessToken = 'pk.eyJ1IjoiY2xpcDM2IiwiYSI6ImNrbGQwbHkyODQzeXAyd3Vpbm0zcmtjZjMifQ.CP1WgT3qS4809VGPhGElJA';
-         
+
          const map = new mapboxgl.Map({
            container: 'map', // container id
            style: 'mapbox://styles/ehl7/clpvqdu1700gy01r7hw1nflc0', // stylesheet
            center: [-122.3321, 47.6062], // starting position defaults to downtown Seattle[lng, lat]
            zoom: 11.5 // starting zoom
          });
-         
+
          // Target the params form in the HTML
          const params = document.getElementById('params');
-         
+
          // Create variables to use in getIso()
          const urlBase = 'https://api.mapbox.com/isochrone/v1/mapbox/';
          let lon = -77.034;
          let lat = 38.899;
          let profile = 'cycling';
          let minutes = 10;
-         
+
          // Set up a marker that you can use to show the query's coordinates
          const marker = new mapboxgl.Marker({
            'color': '#314ccd'
          });
-         
+
          // Create a LngLat object to use in the marker initialization
          // https://docs.mapbox.com/mapbox-gl-js/api/#lnglat
          const lngLat = {
            lon: lon,
            lat: lat
          };
-         
+
          // Create a function that sets up the Isochrone API query then makes a fetch call
          async function getIso() {
            const query = await fetch(
@@ -143,8 +152,45 @@
            const data = await query.json();
            // Set the 'iso' source's data to what's returned by the API query
            map.getSource('iso').setData(data);
+           return data;
          }
-         
+
+        //Calls getIso() and filters datasets for recources within the isochrone
+        async function getIsoWrapper() {
+          let iso = await getIso();
+          let response, parks, shops, vets;
+          response = await fetch('assets/pet_shops.geojson');
+          shops = await response.json();
+          response = await fetch('assets/veterinary.geojson');
+          vets = await response.json();
+          response = await fetch('assets/off_leash_parks.geojson');
+          parks = await response.json();
+
+          const isoViz = map.getLayoutProperty(
+            'isoLayer',
+            'visibility'
+          );
+
+          if (isoViz === 'visible') {
+            let shopsFiltered = shops.features.filter((feature) => turf.booleanIntersects(turf.point(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+            let isoShops = shops;
+            isoShops.features = shopsFiltered;
+            map.getSource('shops').setData(isoShops);
+            let vetsFiltered = vets.features.filter((feature) => turf.booleanIntersects(turf.point(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+            let isoVets = vets;
+            isoVets.features = vetsFiltered;
+            map.getSource('vets').setData(isoVets);
+            let parksFiltered = parks.features.filter((feature) => turf.booleanIntersects(turf.multiPolygon(feature.geometry.coordinates), turf.polygon(iso.features[0].geometry.coordinates)));
+            let isoParks = parks;
+            isoParks.features = parksFiltered;
+            map.getSource('parks').setData(isoParks);
+          } else {
+            map.getSource('shops').setData(shops);
+            map.getSource('vets').setData(vets);
+            map.getSource('parks').setData(parks);
+          }
+        }
+
          // When a user changes the value of profile or duration by clicking a button, change the parameter's value and make the API query again
          params.addEventListener('change', (event) => {
            if (event.target.name === 'profile') {
@@ -152,9 +198,9 @@
            } else if (event.target.name === 'duration') {
              minutes = event.target.value;
            }
-           getIso();
+           getIsoWrapper();//getIso();
          });
-        
+
          // Function to get user's current location
          function getLocation() {
            if (navigator.geolocation) {
@@ -163,20 +209,20 @@
            alert("Geolocation is not supported by this browser.");
            }
          }
-         
+
          function showPosition(position) {
            // Update the lat and lon with the user's current position
            lat = position.coords.latitude;
            lon = position.coords.longitude;
-         
+
            // Update map center and marker position
            map.setCenter([lon, lat]);
            marker.setLngLat([lon, lat]);
-         
+
            // Call the Isochrone API with the new position
-           getIso();
+           getIsoWrapper();//getIso();
          }
-         
+
          function showError(error) {
            switch(error.code) {
            case error.PERMISSION_DENIED:
@@ -194,131 +240,151 @@
            }
          }
          async function loadMap() {
-         let response, parks, shops, vets;
-         response = await fetch('assets/pet_shops.geojson');
-         shops = await response.json();
-         response = await fetch('assets/veterinary.geojson');
-         vets = await response.json();
-         response = await fetch('assets/off_leash_parks.geojson');
-         parks = await response.json();
-         
-         map.on('load', () => {
-         // When the map loads, add the source and layer
-         map.addSource('iso', {
-         type: 'geojson',
-         data: {
-           'type': 'FeatureCollection',
-           'features': []
-         }      
-         });
-         
-         map.addLayer({
-         'id': 'isoLayer',
-         'type': 'fill',
-         'source': 'iso',
-         'layout': {},
-         'paint': {
-           'fill-color': '#5a3fc0',
-           'fill-opacity': 0.3
-         }
-         }, 'poi-label');
+          let response, parks, shops, vets;
+          response = await fetch('assets/pet_shops.geojson');
+          shops = await response.json();
+          response = await fetch('assets/veterinary.geojson');
+          vets = await response.json();
+          response = await fetch('assets/off_leash_parks.geojson');
+          parks = await response.json();
 
-         // Load and add pet shop icon
-         //https://static.vecteezy.com/system/resources/previews/015/604/287/original/pet-shop-icon-outline-style-vector.jpg
-         map.loadImage('https://cdn-icons-png.flaticon.com/512/3028/3028549.png', function(error, image) { // Replace with your path or URL
-         if (error) throw error;
-         map.addImage('shop-icon', image);
-         
-         map.addLayer({
-           'id': 'shops-icon-layer',
-           'type': 'symbol',
-           'source': {
-             'type': 'geojson',
-             'data': shops
-           },
-           'layout': {
-             'icon-image': 'shop-icon',
-             'icon-size': 0.06
-           }
-         });
-         });
-         
-         // Load and add veterinary clinic icon
-         //https://png.pngtree.com/png-vector/20191030/ourmid/pngtree-hospital-icon-png-image_1922195.jpg
-         map.loadImage('https://cdn-icons-png.flaticon.com/512/4320/4320350.png', function(error, image) { // Replace with your path or URL
-         if (error) throw error;
-         map.addImage('hospital-icon', image);
-         
-         map.addLayer({
-           'id': 'vets-icon-layer',
-           'type': 'symbol',
-           'source': {
-             'type': 'geojson',
-             'data': vets
-           },
-           'layout': {
-             'icon-image': 'hospital-icon',
-             'icon-size': 0.055
-           }
-         });
-         });
+          map.on('load', () => {
+          // When the map loads, add the source and layer
+          map.addSource('iso', {
+          type: 'geojson',
+          data: {
+            'type': 'FeatureCollection',
+            'features': []
+          }
+          });
 
-           // risa ability to click the point and give info on the name and address as a popup
-           // for pet shop
-           map.on('click', 'shops-icon-layer', (e) => {
-               const coordinates = e.features[0].geometry.coordinates.slice();
-               const shopInfo = e.features[0].properties;
-               const shopAddress = shopInfo.address; // Accessing the 'address' property
-         
-               new mapboxgl.Popup({
-                   maxWidth: '400px', // Adjust the width as needed
-               })
-               .setLngLat(coordinates)
-               .setHTML(`<h4><i>Pet Shop</i></h4><h3>Name: <b>${shopInfo.name}</b></h3><p>Address: <b>${shopAddress}</b></p>`)
-               .addTo(map);
-           });
-         
-           // For veterinary
-           map.on('click', 'vets-icon-layer', (e) => {
-               const coordinates = e.features[0].geometry.coordinates.slice();
-               const vetInfo = e.features[0].properties;
-               const vetAddress = vetInfo.address; // Accessing the 'address' property
-         
-               new mapboxgl.Popup({
-                   maxWidth: '400px', // Adjust the width as needed
-               })
-               .setLngLat(coordinates)
-               .setHTML(`<h4><i>Veterinary Clinic</i></h4><h3>Name: <b>${vetInfo.name}</b></h3><p>Address: <b>${vetAddress}</b></p>`)
-               .addTo(map);
-           });
-         
-             // Initialize the marker at the query coordinates
-             marker.setLngLat(lngLat).addTo(map);
-         
-             // Make the API call
-             getIso();
-             getLocation();
-    
-             map.addSource('parks', {
-                 type: 'geojson',
-                 data: parks
-             });
-         
-             map.addLayer({
-                 'id': 'park-layer',
-                 'type': 'fill',
-                 'source': 'parks',
-                 'paint': {
-                     'fill-color': '#0080ff', // blue color fill
-                     'fill-opacity': 0.5
-                 }
-             });
+          map.addLayer({
+          'id': 'isoLayer',
+          'type': 'fill',
+          'source': 'iso',
+          'layout': {
+            'visibility': 'visible'
+          },
+          'paint': {
+            'fill-color': '#5a3fc0',
+            'fill-opacity': 0.3
+          }
+          }, 'poi-label');
 
-           });
-         }
-         loadMap();
+          map.addSource('shops', {
+              type: 'geojson',
+              data: shops
+          });
 
-          // Initialize the checkboxes for Pet Resources 
+          map.addSource('vets', {
+              type: 'geojson',
+              data: vets
+          });
+
+          map.addSource('parks', {
+                type: 'geojson',
+                data: parks
+            });
+
+          // Load and add pet shop icon
+          //https://static.vecteezy.com/system/resources/previews/015/604/287/original/pet-shop-icon-outline-style-vector.jpg
+          map.loadImage('https://cdn-icons-png.flaticon.com/512/3028/3028549.png', function(error, image) { // Replace with your path or URL
+          if (error) throw error;
+          map.addImage('shop-icon', image);
+
+            // Load and add veterinary clinic icon
+          //https://png.pngtree.com/png-vector/20191030/ourmid/pngtree-hospital-icon-png-image_1922195.jpg
+          map.loadImage('https://cdn-icons-png.flaticon.com/512/4320/4320350.png', function(error, image) { // Replace with your path or URL
+          if (error) throw error;
+          map.addImage('hospital-icon', image);
+
+          map.addLayer({
+                'id': 'park-layer',
+                'type': 'fill',
+                'source': 'parks',
+                'paint': {
+                    'fill-color': '#0080ff', // blue color fill
+                    'fill-opacity': 0.5
+                }
+            });
+
+          map.addLayer({
+            'id': 'shops-icon-layer',
+            'type': 'symbol',
+            'source': 'shops',
+            'layout': {
+              'icon-image': 'shop-icon',
+              'icon-size': 0.06
+            }
+          });
+          });
+
+          map.addLayer({
+            'id': 'vets-icon-layer',
+            'type': 'symbol',
+            'source': 'vets',
+            'layout': {
+              'icon-image': 'hospital-icon',
+              'icon-size': 0.055
+            }
+          });
+          });
+
+            // risa ability to click the point and give info on the name and address as a popup
+            // for pet shop
+            map.on('click', 'shops-icon-layer', (e) => {
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const shopInfo = e.features[0].properties;
+                const shopAddress = shopInfo.address; // Accessing the 'address' property
+
+                new mapboxgl.Popup({
+                    maxWidth: '400px', // Adjust the width as needed
+                })
+                .setLngLat(coordinates)
+                .setHTML(`<h4><i>Pet Shop</i></h4><h3>Name: <b>${shopInfo.name}</b></h3><p>Address: <b>${shopAddress}</b></p>`)
+                .addTo(map);
+            });
+
+            // For veterinary
+            map.on('click', 'vets-icon-layer', (e) => {
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const vetInfo = e.features[0].properties;
+                const vetAddress = vetInfo.address; // Accessing the 'address' property
+
+                new mapboxgl.Popup({
+                    maxWidth: '400px', // Adjust the width as needed
+                })
+                .setLngLat(coordinates)
+                .setHTML(`<h4><i>Veterinary Clinic</i></h4><h3>Name: <b>${vetInfo.name}</b></h3><p>Address: <b>${vetAddress}</b></p>`)
+                .addTo(map);
+            });
+
+            map.on('click', 'park-layer', (e) => {
+                const parkInfo = e.features[0].properties;
+                const parkName = parkInfo.NAME; // Accessing the 'name' property
+
+                new mapboxgl.Popup({
+                    maxWidth: '400px', // Adjust the width as needed
+                })
+                .setLngLat(e.lngLat)
+                .setHTML(`<h2><i>Dog Park<i></h2><h3>Name: <b>${parkName}<b></h3>`)
+                .addTo(map);
+            });
+
+              // Initialize the marker at the query coordinates
+              marker.setLngLat(lngLat).addTo(map);
+
+              // Make the API call
+              getIsoWrapper();//getIso();
+              getLocation();
+
+
+
+            });
+        }
+        loadMap();
+
+          // Initialize the checkboxes for Pet Resources
           // users can click the pet shops or vet clincs to show or hide the icon associated to the variables
           const checkboxes = document.querySelectorAll('input[name="pet-resource"]');
           checkboxes.forEach((checkbox) => {
@@ -330,7 +396,34 @@
                 map.setLayoutProperty(layerId, 'visibility', visibility);
               });
           });
-         
+
+          //Initializes toggle for the isochrone, changes button text, and reloads data on map
+          const isoToggle = document.querySelectorAll('input[name="iso-toggle"]');
+          isoToggle[0].checked = true;
+          isoToggle[0].addEventListener('change', () => {
+            let text = document.getElementById('iso-div').innerHTML;
+            if (text === 'On') {
+              document.getElementById('iso-div').innerHTML = 'Off'
+            } else {
+              document.getElementById('iso-div').innerHTML = 'On';
+            }
+            const isoViz = map.getLayoutProperty(
+              'isoLayer',
+              'visibility'
+            );
+
+            if (isoViz === 'visible') {
+              map.setLayoutProperty('isoLayer', 'visibility', 'none');
+            } else {
+              map.setLayoutProperty(
+              'isoLayer',
+              'visibility',
+              'visible'
+              );
+            }
+
+            getIsoWrapper();
+          });
       </script>
    </body>
 </html>
