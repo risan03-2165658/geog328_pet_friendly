@@ -22,13 +22,17 @@ The overarching aim of this web map is to enhance the pet-friendly environment o
 
 * Customizable Widget: The widget, crafted with HTML and CSS, allows users to select their preferred mode of transportation and travel time as well as select which pet recources are visible on the map. JavaScript event listeners handle user input, adjusting the map polygon display accordingly.
 
-* Interactive Map Interface: Implemented using Mapbox GL JS, providing a smooth and responsive user experience. Users can pan and zoom to explore different areas of Seattle.
+* Interactive Map Interface: Implemented using Mapbox GL JS, providing a smooth and responsive user experience. Users can pan and zoom to explore different areas of Seattle through the use of the map interface.
 
 * Location-Based Services: Utilizes GeoJSON data to pinpoint pet resources like shops and clinics on the map. The JavaScript fetch API is used to load GeoJSON files containing locations of pet resources.
 
+<<<<<<< HEAD
 * Dynamic Information Display: Click events on the map trigger pop-ups that display information about each pet resource. This is achieved by attaching event listeners to map elements, fetching data from the GeoJSON files.
+=======
+* Dynamic Information Display: Click on the icons on the map to trigger pop-ups that display detailed information about each pet resource. This is achieved by attaching event listeners to map elements, fetching data from the GeoJSON files.
+>>>>>>> refs/remotes/origin/main
 
-* User Location Detection: The web map leverages the Geolocation API to fetch the user's current location, offering personalized resource suggestions based on their position and making this a much more useful web map. 
+* User Location Detection: The web map leverages the Geolocation API to fetch the user's current location, offering personalized resource suggestions based on the user's current location.
 
 ## Data Sources
 The project leverages various datasets, including city park data from the Seattle City GIS, and pet shops and veterinary clinics location data created from Google My Maps, to provide a comprehensive view of pet-friendly locations in Seattle.
@@ -48,7 +52,8 @@ This project is built using these several key technologies:
 * Turf.js: For GIS data processing and spatial analysis.
 
 ## Limitations
-While the Pet-Friendly Web Map of Seattle offers numerous benefits, it's important to acknowledge the limitations of our project and data. Firstly, we believe the map is highly dependent on the accuracy of its current data sources. Any changes when updating information about pet resources, such as new pet shops or changes in store policies, might lead to outdated or incomplete information. Secondly, the map's functionality and user experience rely heavily on the user's internet connectivity and device capabilities. Users with slower internet connections or less advanced devices may face challenges in accessing or navigating the map effectively. Additionally, the map primarily caters to the Seattle area, potentially limiting its usefulness for visitors or new residents unfamiliar with the city's geography. Lastly, while the map provides location-based services, it doesn't account for the quality or reputation of the listed pet resources, which can be crucial for users making decisions about pet care. These limitations, while not undermining the project's overall value, are important considerations for users and developers alike in optimizing and utilizing the web map effectively.
+While the Pet-Friendly Web Map of Seattle offers numerous benefits, we acknowledge the limitations of our project and data. Firstly, we believe the map primarily caters to the Seattle area, potentially limiting its usefulness for visitors or new residents unfamiliar with the city's geography. In addition, while the map provides location-based services, it doesn't account for the quality or reputation of the listed pet resources, which can be crucial for users making decisions about pet care. We also noticed that our map's functionality and user experience rely heavily on the user's internet connectivity and device capabilities. Users with slower internet connections or less advanced devices may face challenges in accessing or navigating the map effectively. These limitations, while not undermining the project's overall value, are important considerations for users and developers alike in optimizing and utilizing the web map effectively.
+
 
 ## Acknowledgements
 Special thanks to Professor Zhao and TA Liz Peng for their guidance and support in the GEOG 328 course. Appreciation is also extended to the creators of the 'Pet Resource Web Map' for their inspirational work in the field of pet-friendly mapping in Seattle.
